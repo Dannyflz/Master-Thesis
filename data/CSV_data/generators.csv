@@ -1,0 +1,3 @@
+name,bus,p_nom_extendable,capital_cost,marginal_cost,carrier
+CST,bus1 solar,True,550000,4500,solar heat
+Backup,bus3 fossil,True,300000,2500,fossil heat

@@ -1,0 +1,5 @@
+name,carrier
+bus1 solar,solar heat
+bus2 solar,solar heat
+bus3 solar,fossil heat
+bus3 fossil,fossil heat

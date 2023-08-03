@@ -1,0 +1,4 @@
+name,bus0,bus1,efficiency
+link0,bus1 solar,bus2 solar,1
+link1,bus2 solar,bus3 solar,1
+link5,bus3 fossil,bus3 solar,1
