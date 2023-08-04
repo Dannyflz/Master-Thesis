@@ -1,4 +1,3 @@
-name,bus0,bus1,efficiency
-link0,bus1 solar,bus2 solar,1
-link1,bus2 solar,bus3 solar,1
-link5,bus3 fossil,bus3 solar,1
+name,bus0,bus1,efficiency,p_nom,p_nom_extendable
+link0,bus1,bus2,1,100,True
+link1,bus2,bus3,1,100,True

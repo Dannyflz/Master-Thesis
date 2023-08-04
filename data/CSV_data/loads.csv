@@ -1,2 +1,2 @@
 name,bus,p_set
-Load,bus3 solar,1
+Demand 1,bus3,200

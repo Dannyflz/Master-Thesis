@@ -1,2 +1,2 @@
-name,bus,name.1,bus.1,carrier,e_nom_extendable
-Speicher,bus2,TES,bus2 solar,solar heat,True
+name,bus,name.1,bus.1,carrier,e_nom,e_nom_extendable
+Speicher,bus2,Store,bus2,heat,50,True

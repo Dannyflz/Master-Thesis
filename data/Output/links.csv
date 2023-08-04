@@ -1,4 +1,3 @@
-name,bus0,bus1,carrier,build_year,min_up_time,min_down_time,up_time_before,down_time_before
-link0,bus1 solar,bus2 solar,solar heat,0,0,0,1,0
-link1,bus2 solar,bus3 solar,solar heat,0,0,0,1,0
-link5,bus3 fossil,bus3 solar,fossil heat,0,0,0,1,0
+name,bus0,bus1,p_nom,p_nom_extendable,carrier,build_year,min_up_time,min_down_time,up_time_before,down_time_before,p_nom_opt
+link0,bus1,bus2,100.0,True,heat,0,0,0,1,0,95.9176
+link1,bus2,bus3,100.0,True,heat,0,0,0,1,0,95.9176

@@ -32,8 +32,7 @@ def xlsx_to_csv(xlsx_file, output_folder, selected_sheets=None):
         
         csv_file = os.path.join(output_folder, f"{sheet_name_lower}.csv")
         df.to_csv(csv_file, index=False, mode="w")
-        #data_df = pd.read_csv(csv_file)
-        #print(data_df)
+        
         print(f"Erstelle {csv_file}.")
 
 def Inputs_dataframes (xlsx_file, selected_sheets_techno = None):
@@ -59,7 +58,7 @@ def create_dataframes_from_csv(csv_folder, selected_sheets):
     return dataframes_dict_nw
 
 def import_components_from_dataframes(dataframes_dict_nw, network):
-    print(dataframes_dict_nw)
+    
     # Import "Buses" components
     if "Buses" in dataframes_dict_nw:
         buses_df = dataframes_dict_nw["Buses"]
@@ -105,18 +104,32 @@ def import_components_from_dataframes(dataframes_dict_nw, network):
         
         network.import_components_from_dataframe(stores_df, "Store")
         
-    print(dataframes_dict_nw["Generators"],dataframes_dict_nw["Loads"])
-            
-    # Import "Switch" components
+    # Import "Generators-p_max_pu" components
     
-            
+    if "Generators-p_max_pu" in dataframes_dict_nw:
+        p_max_pu_df = dataframes_dict_nw["Generators-p_max_pu"]
+        p_max_pu_df.set_index("snapshots", inplace=True)
+        network.set_snapshots(p_max_pu_df.index)
+        network.import_series_from_dataframe(p_max_pu_df, "Generator", "p_max_pu")        
     return network   
+
+def optimize_and_export_to_csv(network, export_folder):
+    # Optimize the network
+    network.optimize()
+
+    # Export the optimized network to CSV files
+    network.export_to_csv_folder(export_folder)
+
+    # Return the optimized network
+    return network
+
+ 
  
 if __name__ == "__main__":
     xlsx_file = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\Setup.xlsx" # Füge hier den Pfad ein, der die CSV Setup Daten enthält
     output_folder = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\CSV_data" # FÜge hier den Pfad ein, wo die CSV Dateien gespeichert werden
     export_folder = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\Output"
-    selected_sheets = ["buses", "carriers", "generators", "links", "stores","loads"]  # Füge hier die Namen der gewünschten Blätter hinzu
+    selected_sheets = ["buses", "carriers", "generators","stores", "links","loads", "generators-p_max_pu"]  # Füge hier die Namen der gewünschten Blätter hinzu
     selected_sheets_techno = ["CST", "TES"]
     csv_folder = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\CSV_data"  # Passe den Pfad zum Ordner mit den CSV-Dateien an
     csv_file_path_p_max_pu = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\CSV_data\generators-p_max_pu.csv"
@@ -134,23 +147,23 @@ if __name__ == "__main__":
     dataframes_dict_nw = create_dataframes_from_csv(csv_folder, selected_sheets)
         
     # Erstelle Netzwerk
-    network = pypsa.Network()
+    network = pypsa.Network()   
 
     # Erstelle Komponenten im netzwerk aus Dataframes
     network = import_components_from_dataframes(dataframes_dict_nw, network)
     
     # Füge Kosten für CO2-Emissionen hinzu und minimiere sie
     #minimize_co2_emissions(network)
-          
-    #cst_capital_cost_calc(network, dataframes_dict)
-    
-    #tes_capital_cost_calc(network, dataframes_dict)
     
     #print(network.links, network.buses, network.generators, network.loads, network.stores, network.global_constraints)
-    
+    network.consistency_check()   
+    network.plot() 
     optimize_and_export_to_csv(network, export_folder)
     
     
+
+
+
     
     
 
