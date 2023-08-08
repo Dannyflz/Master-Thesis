@@ -1,4 +1,10 @@
 name,carrier
-bus1,heat
-bus2,heat
-bus3,heat
+bus1,solar heat
+bus2,solar heat
+bus3,PV power
+bus4,PV power
+bus5,Wind power
+bus6,Wind power
+bus7,power
+bus8,fossil heat
+bus9,heat

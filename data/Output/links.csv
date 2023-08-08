@@ -1,3 +1,14 @@
 name,bus0,bus1,p_nom,p_nom_extendable,carrier,build_year,min_up_time,min_down_time,up_time_before,down_time_before,p_nom_opt
-link0,bus1,bus2,100.0,True,heat,0,0,0,1,0,95.9176
-link1,bus2,bus3,100.0,True,heat,0,0,0,1,0,95.9176
+link0,bus1,bus2,100.0,True,solar heat,0,0,0,1,0,0.0
+link1,bus1,bus9,100.0,True,solar heat,0,0,0,1,0,0.0
+link2,bus2,bus9,100.0,True,solar heat,0,0,0,1,0,0.0
+link3,bus3,bus9,100.0,True,PV power,0,0,0,1,0,0.0
+link4,bus3,bus7,100.0,True,PV power,0,0,0,1,0,0.0
+link5,bus4,bus9,100.0,True,PV power,0,0,0,1,0,0.0
+link6,bus4,bus7,100.0,True,PV power,0,0,0,1,0,0.0
+link7,bus5,bus9,100.0,True,Wind power,0,0,0,1,0,0.0
+link8,bus5,bus7,100.0,True,Wind power,0,0,0,1,0,0.0
+link9,bus6,bus9,100.0,True,Wind power,0,0,0,1,0,0.0
+link10,bus6,bus7,100.0,True,Wind power,0,0,0,1,0,0.0
+link11,bus7,bus9,100.0,True,power,0,0,0,1,0,0.0
+link12,bus8,bus9,100.0,True,fossil heat,0,0,0,1,0,100.0

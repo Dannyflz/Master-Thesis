@@ -1,2 +1,3 @@
-name,bus,carrier,e_nom,e_nom_extendable,build_year
-Store,bus2,heat,50.0,True,0
+name,bus,carrier,e_nom,build_year,e_nom_opt
+TES,bus2,solar heat,1000.0,0,1000.0
+ETES,bus7,power,0.0,0,0.0

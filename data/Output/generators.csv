@@ -1,3 +1,7 @@
 name,bus,p_nom_extendable,capital_cost,marginal_cost,carrier,p_nom,build_year,min_up_time,min_down_time,up_time_before,down_time_before,p_nom_opt
-CST,bus1,False,550000.0,3000.0,heat,100.0,0,0,0,1,0,100.0
-Backup,bus3,True,600000.0,3500.0,heat,100.0,0,0,0,1,0,200.0
+CST,bus1,True,2467048.883308054,3000.0,solar heat,100.0,0,0,0,1,0,0.0
+PV,bus3,False,0.0,0.0,PV power,0.0,0,0,0,1,0,0.0
+PV PPA,bus4,False,0.0,0.0,PV power,0.0,0,0,0,1,0,0.0
+Wind,bus5,False,0.0,0.0,Wind power,0.0,0,0,0,1,0,0.0
+Wind PPA,bus6,False,0.0,0.0,Wind power,0.0,0,0,0,1,0,0.0
+Backup,bus8,True,600000.0,3500.0,fossil heat,100.0,0,0,0,1,0,100.0

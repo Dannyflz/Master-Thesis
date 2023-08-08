@@ -5,8 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-
-
 def xlsx_to_csv(xlsx_file, output_folder, selected_sheets=None):
     # Einlesen der XLSX-Datei
     xls = pd.ExcelFile(xlsx_file)
@@ -122,13 +120,87 @@ def optimize_and_export_to_csv(network, export_folder):
 
     # Return the optimized network
     return network
+ 
+def export_components_to_excel(network, postpro_folder):
+    component_list = ["buses", "generators", "loads", "links", "stores"]
 
- 
- 
+    existing_files = [f for f in os.listdir(postpro_folder) if f.startswith("Results_export")]
+    existing_indices = [int(f.split("_")[2].split(".")[0]) for f in existing_files if len(f.split("_")) == 3]
+    if existing_indices:
+        next_index = max(existing_indices) + 1
+    else:
+        next_index = 1
+    
+    output_filename = f"Results_export_{next_index}.xlsx"
+    output_path = os.path.join(postpro_folder, output_filename)
+    
+    with pd.ExcelWriter(output_path, engine='xlsxwriter') as writer:
+        for component_name in component_list:
+            component_df = getattr(network, component_name)
+            component_df.to_excel(writer, sheet_name=component_name, index=False)
+    
+    # Export the time-dependent component DataFrames
+        for component_type in ["generators_t"]:
+            for attribute in ["p", "p_set", "marginal_cost", "efficiency", "stand_by_cost", "status"]:
+                component_df_t = getattr(network, component_type)
+                attribute_df = component_df_t[attribute]
+                sheet_name = f"{component_type}.{attribute}"
+                attribute_df.to_excel(writer, sheet_name=sheet_name, index=False)
+                
+        for component_type in ["buses_t"]:
+            for attribute in ["v_mag_pu_set", "p", "marginal_price"]:
+                component_df_t = getattr(network, component_type)
+                attribute_df = component_df_t[attribute]
+                sheet_name = f"{component_type}.{attribute}"
+                attribute_df.to_excel(writer, sheet_name=sheet_name, index=False)
+                
+        for component_type in ["stores_t"]:
+            for attribute in ["e_min_pu", "e_max_pu", "p_set", "marginal_cost", "standing_loss", "p", "e"]:
+                component_df_t = getattr(network, component_type)
+                attribute_df = component_df_t[attribute]
+                sheet_name = f"{component_type}.{attribute}"
+                attribute_df.to_excel(writer, sheet_name=sheet_name, index=False)
+                
+        for component_type in ["loads_t"]:
+            for attribute in ["p_set","p"]:
+                component_df_t = getattr(network, component_type)
+                attribute_df = component_df_t[attribute]
+                sheet_name = f"{component_type}.{attribute}"
+                attribute_df.to_excel(writer, sheet_name=sheet_name, index=False)
+                         
+    print(f"Results_export_{next_index}.xlsx has been saved!")
+
+def CST_cost_calc(dataframes_dict, p_opt):
+    solarfield_power = p_opt
+    CST_df = dataframes_dict['CST']
+    
+    solarfield_ref_cost = CST_df.loc[CST_df['name'] == 'solarfield_ref_cost', 'value'].values[0]
+    solarfield_ref_capacity = CST_df.loc[CST_df['name'] == 'solarfield_reference_capacity', 'value'].values[0]
+    solarfield_eos_factor = CST_df.loc[CST_df['name'] == 'solarfield_eos_factor', 'value'].values[0]
+
+    solarfield_specific_cost = solarfield_ref_cost * (solarfield_power / solarfield_ref_capacity) ** solarfield_eos_factor
+    
+    print("Calculated specific cost", solarfield_specific_cost)
+    return solarfield_specific_cost
+
+def iterative_optimization(network):
+    
+    old_p_opt = network.generators.p_nom["CST"]
+    
+    for _ in range(25):
+        capital_cost_CST = CST_cost_calc(dataframes_dict, old_p_opt)
+        network.generators.capital_cost["CST"] = capital_cost_CST
+        optimize_and_export_to_csv(network, export_folder)
+        export_components_to_excel(network, postpro_folder)
+    return network
+        
+    
+
 if __name__ == "__main__":
     xlsx_file = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\Setup.xlsx" # Füge hier den Pfad ein, der die CSV Setup Daten enthält
     output_folder = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\CSV_data" # FÜge hier den Pfad ein, wo die CSV Dateien gespeichert werden
     export_folder = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\Output"
+    postpro_folder = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\Post_processing"
     selected_sheets = ["buses", "carriers", "generators","stores", "links","loads", "generators-p_max_pu"]  # Füge hier die Namen der gewünschten Blätter hinzu
     selected_sheets_techno = ["CST", "TES"]
     csv_folder = r"D:\OneDrive - Fichtner GmbH & Co. KG\Masterarbeit\Repository\Master-Thesis\OPTIMIZER\data\CSV_data"  # Passe den Pfad zum Ordner mit den CSV-Dateien an
@@ -150,24 +222,8 @@ if __name__ == "__main__":
     network = pypsa.Network()   
 
     # Erstelle Komponenten im netzwerk aus Dataframes
-    network = import_components_from_dataframes(dataframes_dict_nw, network)
-    
-    # Füge Kosten für CO2-Emissionen hinzu und minimiere sie
-    #minimize_co2_emissions(network)
-    
-    #print(network.links, network.buses, network.generators, network.loads, network.stores, network.global_constraints)
-    network.consistency_check()   
-    network.plot() 
+    network = import_components_from_dataframes(dataframes_dict_nw, network) 
+     
     optimize_and_export_to_csv(network, export_folder)
-    
-    
-
-
-
-    
-    
-
-    
-    
-
-
+    export_components_to_excel(network, postpro_folder)
+    iterative_optimization(network)
