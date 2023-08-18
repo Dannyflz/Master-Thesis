@@ -184,9 +184,6 @@ def CST_cost_calc(dataframes_dict, p_opt):
     return solarfield_specific_cost
 
 def iterative_optimization(network):
-    
-    old_p_opt = network.generators.p_nom["CST"]
-    
     for _ in range(25):
         capital_cost_CST = CST_cost_calc(dataframes_dict, old_p_opt)
         network.generators.capital_cost["CST"] = capital_cost_CST
