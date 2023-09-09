@@ -1,7 +1,5 @@
-name
-solar heat
-PV power
-Wind power
-fossil heat
-power
-heat
+name,co2_emissions
+solar heat,0
+fossil heat,200
+heat,0
+electricity,0

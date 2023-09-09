@@ -1,0 +1,91 @@
+Keys,1,2,3
+CST_p_nom,,,
+CST_p_nom_opt,,,
+CST_Capital_Cost,,,
+CST_Marginal_Cost,,,
+PV Capital Cost,,,
+PV Marginal Cost,,,
+PV p_nom,,,
+PV p_nom_opt,,,
+WIND Capital Cost,,,
+WIND Marginal Cost,,,
+WIND p_nom,,,
+WIND p_nom_opt,,,
+PPA Capital Cost,,,
+PPA Marginal Cost,,,
+PPA p_nom,,,
+PPA p_nom_opt,,,
+BackUp Boiler Capital Cost,,,
+BackUp Boiler Marginal Cost,,,
+BackUp Boiler p_nom,,,
+BackUp Boiler p_nom_opt,,,
+CO2 Emissions Fossil Heat,,,
+CO2 Limit,,,
+CO2 Total Emissions,,,
+Heat_Sink_p_nom_opt,,,
+Heat Sink Capital Cost,,,
+Heat Sink Marginal Cost,,,
+Heat Sink Efficiency,,,
+TES e_nom,,,
+TES e_nom_opt,,,
+TES Capital Cost,,,
+TES Marginal Cost,,,
+TES e_initial,,,
+Annual Energy CST,,,
+Annual Energy PV,,,
+Annual Energy WIND,,,
+Annual Energy PPA,,,
+Annual Energy Backup,,,
+ETES_Link p_nom,,,
+ETES_Link p_nom_opt,,,
+ETES_Link Capital Cost,,,
+ETES_Link Marginal Cost,,,
+ETES e_nom,,,
+ETES e_nom_opt,,,
+ETES Capital Cost,,,
+ETES Marginal Cost,,,
+,16.3,16.3,16.3
+,194.271,194.271,194.271
+,433384.23283568595,419615.1523994167,419615.1523994167
+,0.5417377318747764,0.619100678790086,0.6191006796842691
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,240000.0,240000.0,240000.0
+,200.0,200.0,200.0
+,10.0,10.0,10.0
+,75.0,75.0,75.0
+,200.0,200.0,200.0
+,0.0,0.0,0.0
+,103203713.64000002,92883391.01999998,92883390.97999999
+,51.4524,51.4524,51.4524
+,1801156.9172690308,1966774.2432239426,1966774.2432239426
+,1801156.9172690308,1966774.2432239426,1966774.2432239426
+,1.0,1.0,1.0
+,100.0,100.0,100.0
+,2800.0,2800.0,2800.0
+,28213.334030968817,28213.334030968817,28213.334030968817
+,0.0,0.0,0.0
+,1500.0,1500.0,1500.0
+,358481.514187,410083.298162,410083.298762
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,516018.5682000001,464416.9550999999,464416.95489999995
+,100.0,100.0,100.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0
+,0.0,0.0,0.0

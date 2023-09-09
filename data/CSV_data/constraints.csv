@@ -1,0 +1,2 @@
+name,carrier_attribute,sense,constant
+CO2_Limit,co2_emissions,>,0

@@ -1,3 +1,3 @@
-name,bus,name.1,bus.1,carrier,e_nom,e_nom_extendable
-Speicher,bus2,TES,bus2,solar heat,1000,False
-,,ETES,bus7,power,0,False
+name,bus,name.1,bus.1,carrier,e_nom,e_nom_max,e_nom_extendable,p_set,capital_cost,e_initial
+Speicher,bus2,TES,bus1,solar heat,100,999999,True,200,50000,1500
+,,ETES,bus3,power,0,999999,False,200,0,0

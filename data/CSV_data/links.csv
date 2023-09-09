@@ -1,14 +1,3 @@
-name,bus0,bus1,efficiency,p_nom,p_nom_extendable
-link0,bus1,bus2,1,100,True
-link1,bus1,bus9,1,100,True
-link2,bus2,bus9,1,100,True
-link3,bus3,bus9,1,100,True
-link4,bus3,bus7,1,100,True
-link5,bus4,bus9,1,100,True
-link6,bus4,bus7,1,100,True
-link7,bus5,bus9,1,100,True
-link8,bus5,bus7,1,100,True
-link9,bus6,bus9,1,100,True
-link10,bus6,bus7,1,100,True
-link11,bus7,bus9,1,100,True
-link12,bus8,bus9,1,100,True
+name,bus0,bus1,efficiency,p_nom,p_nom_extendable,capital_cost
+Heat Sink CST,bus1,bus2,1,5.4,True,60000
+ETES Thermal Power,bus3,bus2,1,100.0,True,0

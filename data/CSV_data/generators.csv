@@ -1,7 +1,6 @@
-name,bus,p_nom_extendable,capital_cost,marginal_cost,carrier,sign,p_nom
-CST,bus1,True,550000,3000,solar heat,1,100
-PV,bus3,False,0,0,PV power,1,0
-PV PPA,bus4,False,0,0,PV power,1,0
-Wind,bus5,False,0,0,Wind power,1,0
-Wind PPA,bus6,False,0,0,Wind power,1,0
-Backup,bus8,True,600000,3500,fossil heat,1,100
+name,bus,p_nom_extendable,capital_cost,marginal_cost,carrier,sign,p_nom,p_nom_min,p_nom_max,committable,start_up_cost
+CST,bus1,True,550000,500,solar heat,1,16.3,0,999999,False,0
+PV,bus3,False,0,0,electricity,1,0.0,0,0,False,0
+PPA,bus3,False,0,0,electricity,1,0.0,0,0,False,0
+Wind,bus3,False,0,0,electricity,1,0.0,0,0,False,0
+Backup,bus2,True,240000,200,fossil heat,1,10.0,0,999999,False,0
